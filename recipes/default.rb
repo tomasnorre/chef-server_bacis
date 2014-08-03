@@ -8,7 +8,7 @@
 #
 
 packages=[
-	'htop',
+  'htop',
   'vim'
 ]
 
