@@ -8,7 +8,7 @@
 #
 
 packages = %w(
-  'htop',
+  'htop'
   'vim'
 )
 
