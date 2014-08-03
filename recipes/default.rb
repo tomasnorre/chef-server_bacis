@@ -7,10 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
-packages = [
+packages = %w(
   'htop',
   'vim'
-]
+)
 
 packages.each do |pkg|
   package pkg do
