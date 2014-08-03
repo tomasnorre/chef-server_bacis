@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-packages=[
+packages = [
   'htop',
   'vim'
 ]
