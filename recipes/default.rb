@@ -12,11 +12,8 @@ packages=[
   'vim'
 ]
 
-case node[:platform]
-when 'debian','ubuntu'
-	packages.each do |pkg|
-		package pkg do
-			action :upgrade
-		end
+packages.each do |pkg|
+	package pkg do
+		action :upgrade
 	end
 end
