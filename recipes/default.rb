@@ -7,9 +7,13 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "git"
+
 packages = %w(
   'htop'
+  'sed'
   'vim'
+  'wget'
 )
 
 packages.each do |pkg|
