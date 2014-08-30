@@ -26,8 +26,6 @@ packages = %w(
   'git'
 )
 
-
-
 case node['platform']
 when 'debian', 'ubuntu'
   packagespurge.each do |pkg|
