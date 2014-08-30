@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'server_basic::ntp'
+
 packagespurge = %w(
   'apparmor'
   'apparmor-utils'
