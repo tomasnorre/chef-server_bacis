@@ -8,14 +8,14 @@
 #
 
 packagespurge = %w(
-  apparmor
-  apparmor-utils
-  libapparmor-perl
-  libapparmor1
-  ubuntu-minimal
-  command-not-found
-  command-not-found-data
-  landscape-common
+  'apparmor'
+  'apparmor-utils'
+  'libapparmor-perl'
+  'libapparmor1'
+  'ubuntu-minimal'
+  'command-not-found'
+  'command-not-found-data'
+  'landscape-common'
 )
 
 packages = %w(
