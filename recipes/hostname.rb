@@ -15,9 +15,9 @@ bash 'update host file' do
   not_if "grep -q #{node['nodeinfo']['hostname']} /etc/hosts"
 end
 
-bash "set hostname" do
+bash 'set hostname' do
   only_if { node['nodeinfo']['hostname'] }
-  user "root"
+  user 'root'
   code <<-EOS
   echo #{node['nodeinfo']['hostname']} > /etc/hostname
   service hostname restart
