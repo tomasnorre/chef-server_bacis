@@ -16,6 +16,13 @@ service 'ntp' do
   action [:enable, :start]
 end
 
+template '/etc/timezone' do
+  source 'timezone.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
 template '/etc/ntp.conf' do
   source 'ntp.conf.erb'
   owner 'root'

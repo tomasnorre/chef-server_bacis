@@ -8,6 +8,7 @@
 #
 
 include_recipe 'server_basic::ntp'
+#include_recipe 'server_basic::hostname'
 
 packagespurge = %w(
   'apparmor'
