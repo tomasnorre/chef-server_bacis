@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'server_basic::ntp'
+include_recipe 'ntp'
 #include_recipe 'server_basic::hostname'
 
 packagespurge = %w(
