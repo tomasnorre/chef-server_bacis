@@ -42,3 +42,10 @@ when 'debian', 'ubuntu'
     end
   end
 end
+
+template '/root/provision.txt' do
+  source 'provision.txt.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
