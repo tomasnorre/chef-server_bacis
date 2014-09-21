@@ -27,6 +27,7 @@ packages = %w(
   'vim'
   'wget'
   'git'
+  'curl'
 )
 
 case node['platform']
