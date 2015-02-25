@@ -28,6 +28,7 @@ packages = %w(
   'wget'
   'git'
   'curl'
+  'tree'
 )
 
 case node['platform']
