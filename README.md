@@ -1,41 +1,9 @@
 server_basic Cookbook
 =====================
-TODO: Enter the cookbook description here.
+This cookbook install/setup a set of preferred applications and configurations I want on all my server nodes. The cookbook also contains a subset of applications that I do not want on my server nodes.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+[![Build Status](https://travis-ci.org/tomasnorre/chef-server_bacis.svg)](https://travis-ci.org/tomasnorre/chef-server_bacis)
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - server_basic needs toaster to brown your bagel.
-
-Attributes
-----------
-TODO: List you cookbook attributes here.
-
-e.g.
-#### server_basic::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['server_basic']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
-Usage
------
 #### server_basic::default
 TODO: Write usage instructions for each cookbook.
 
@@ -44,7 +12,7 @@ Just include `server_basic` in your node's `run_list`:
 
 ```json
 {
-  "name":"my_node",
+  "hostname":"my_node",
   "run_list": [
     "recipe[server_basic]"
   ]
@@ -53,8 +21,6 @@ Just include `server_basic` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
 e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
@@ -63,6 +29,31 @@ e.g.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Authors
+Authors
 -------------------
-Authors: TODO: List authors
+* [Tomas Norre Mikkelsen](http://github.com/tomasnorre)
+
+License
+-------
+
+The MIT License (MIT)
+
+Copyright (c) 2015 - Tomas Norre Mikkelsen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
