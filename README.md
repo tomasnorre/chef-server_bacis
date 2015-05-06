@@ -12,12 +12,21 @@ Just include `server_basic` in your node's `run_list`:
 
 ```json
 {
-  "hostname":"my_node",
   "run_list": [
     "recipe[server_basic]"
   ]
 }
 ```
+
+You can also set your timezone if the default `Europe/Copenhagen` do not match your needs with following:
+
+```json
+{
+  "nodeinfo": {
+    "timezone": "America/Chicago",
+  },
+}
+````
 
 Contributing
 ------------
