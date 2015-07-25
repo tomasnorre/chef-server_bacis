@@ -29,7 +29,8 @@ packages = %w(
   'wget'
   'git'
   'curl'
-  'tree'
+  'tree',
+  'rsync'
 )
 
 case node['platform']
