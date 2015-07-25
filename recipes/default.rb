@@ -29,7 +29,7 @@ packages = %w(
   'wget'
   'git'
   'curl'
-  'tree',
+  'tree'
   'rsync'
 )
 
