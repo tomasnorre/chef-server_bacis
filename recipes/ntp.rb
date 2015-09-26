@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w(ntp ntpdate).each do |pkg|
+%w(ntp ntpdate tzdata).each do |pkg|
   package pkg
 end
 
