@@ -9,7 +9,7 @@
 
 %w(ntp ntpdate tzdata).each do |pkg|
   package pkg do
-    action: install
+    action :install
   end
 end
 
