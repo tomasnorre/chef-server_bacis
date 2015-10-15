@@ -8,7 +8,9 @@
 #
 
 %w(ntp ntpdate tzdata).each do |pkg|
-  package pkg
+  package pkg do
+    action: install
+  end
 end
 
 # Setting variables
