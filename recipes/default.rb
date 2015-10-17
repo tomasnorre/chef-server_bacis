@@ -31,6 +31,7 @@ packages = %w(
   'curl'
   'tree'
   'rsync'
+  'zsh'
 )
 
 case node['platform']
