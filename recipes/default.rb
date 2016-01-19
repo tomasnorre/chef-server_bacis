@@ -15,7 +15,7 @@ packagespurge = %w(
   'apparmor'
   'apparmor-utils'
   'libapparmor-perl'
-  'libapparmor1'
+  'libapparmor'
   'ubuntu-minimal'
   'command-not-found'
   'command-not-found-data'
