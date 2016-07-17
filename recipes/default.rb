@@ -32,6 +32,9 @@ packages = %w(
   'tree'
   'rsync'
   'zsh'
+  'ruby-dev'
+  'gcc'
+  'mtr'
 )
 
 case node['platform']
