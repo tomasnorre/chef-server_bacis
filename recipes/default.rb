@@ -2,14 +2,14 @@
 # Cookbook Name:: server_basic
 # Recipe:: default
 #
-# Copyright 2014, Tomas Norre Mikkelsen
+# Copyright 2016, Tomas Norre Mikkelsen
 #
-# All rights reserved - Do Not Redistribute
 #
 
 include_recipe 'server_basic::ntp'
 include_recipe 'server_basic::hostname'
 include_recipe 'server_basic::locales'
+include_recipe 'server_basic::yad'
 
 packagespurge = %w(
   'apparmor'
