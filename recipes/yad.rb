@@ -6,8 +6,10 @@
 #
 #
 
+require 'json'
+
 # Prepare directory
-directory /etc/yad do
+directory '/etc/yad' do
   owner 'root'
   group 'root'
   mode '0755'
@@ -28,60 +30,73 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
   webhotels.each do |identifier|
 
     webhotel = data_bag_item('webhotels', identifier)
+    configuration = JSON.load(webhotel["configuration"].to_json)
+    servers = configuration['servers']
 
     # Check if production or integration environment
-    if node['nodeinfo']['hostname'] == webhotel['prod_server']
-      server = webhotel['prod_server']
+    if node['nodeinfo']['hostname'] == servers['production']['hostname']
+      server = configuration['servers']['production']['hostname']
       server_type = 'production'
-      environments = ['production']
     else
-      server = webhotel['int_server']
+      server = servers['integration']['hostname']
       server_type = 'integration'
-      environments = webhotel['environments']
     end
+
+    environments = servers[server_type]['environments']
 
     # If hostname and server is not the same, don't proceed
     if node['nodeinfo']['hostname'] == server
 
-      yad_script = '/usr/local/bin/yad_' + webhotel['id'] + '_typo3_latest'
-      # Create yad scripts
-      template yad_script do
-        source 'yad_project_type_environment.erb'
-        owner 'root'
-        group 'root'
-        mode '0766'
-        variables(
-          project: webhotel['id'],
-          type: 'typo3',
-          environment: 'latest',
-        )
-      end
+      environments.each do |(environment,config)|
+        # Create yad scripts
+        script_dir = '/usr/local/bin/'
+        yad_script = script_dir + 'yad_' + webhotel['id'] + '_' + configuration['type'] + '_' + environment
 
-      # YAD Settings
-      yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/typo3/'
-      yad_settings_file = yad_settings_dir + 'latest.sh'
+        template yad_script do
+          source 'yad_project_type_environment.erb'
+          owner 'root'
+          group 'root'
+          mode '0766'
+          variables(
+            project: webhotel['id'],
+            type: configuration['type'],
+            environment: environment,
+          )
+        end
 
-      directory yad_settings_dir do
-        owner 'root'
-        group 'root'
-        mode '0755'
-        recursive true
-        action :create
-      end
+        # YAD Settings
+        yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/' + configuration['type'] + '/'
+        yad_settings_file = yad_settings_dir + environment + '.sh'
 
-      # Create yad scripts
-      template yad_settings_file do
-        source 'yad_settings.erb'
-        owner 'root'
-        group 'root'
-        mode '0766'
-        variables(
-          project: webhotel['id'],
-          type: 'typo3',
-          environment: 'latest',
-        )
+        directory yad_settings_dir do
+          owner 'root'
+          group 'root'
+          mode '0755'
+          recursive true
+          action :create
+        end
+
+        # Create yad scripts
+        template yad_settings_file do
+          source 'yad_settings.erb'
+          owner 'root'
+          group 'root'
+          mode '0766'
+          variables(
+            project: webhotel['id'],
+            domain: webhotel['domain'],
+            type: configuration['type'],
+            environment: environment,
+            yad_package: configuration['yad_package'],
+            yad_user: configuration['yad_user'],
+            yad_pass: configuration['yad_pass']
+          )
+        end
+
       end
 
     end
+
   end
+
 end
