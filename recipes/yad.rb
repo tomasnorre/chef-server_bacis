@@ -19,7 +19,7 @@ end
 
 # Clone YAD - Yet Another Deployment-tool
 git "YAD" do
-  repository 'https://github.com/aoepeople/YAD.git'
+  repository 'https://github.com/AOE-T3Rookies-2016/YAD.git'
   destination '/etc/yad/deploy/'
   action :sync
 end
@@ -55,8 +55,8 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
         template yad_script do
           source 'yad_project_type_environment.erb'
           owner 'root'
-          group 'root'
-          mode '0766'
+          group 'jenkins'
+          mode '0755'
           variables(
             project: webhotel['id'],
             type: configuration['type'],
@@ -87,6 +87,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
             domain: webhotel['domain'],
             type: configuration['type'],
             environment: environment,
+            mysql_pass: environments[environment]['db_pass'],
             yad_package: configuration['yad_package'],
             yad_user: configuration['yad_user'],
             yad_pass: configuration['yad_pass']

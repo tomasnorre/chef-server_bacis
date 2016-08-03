@@ -2,13 +2,16 @@
 
 export DB_HOST='localhost'
 export DB_USER='<%= @project %>_<%= @environment %>'
-export DB_PASS='mg_pass'
+export DB_PASS='<%= @mysql_pass %>'
 export DB_NAME='<%= @project %>_<%= @type %>_<%= @environment %>'
+
+## TYPO3 Settings
+export TYPO3_SITENAME='<%= @project %> - <%= @environment %>'
 
 #######################
 # YAD specific settings
 
-export YAD_DEPLOY=php.sh
+export YAD_DEPLOY=simple.sh
 export YAD_RELEASE_FOLDER=/var/www/<%= @domain %>/<%= @environment %>
 export YAD_INSTALL_SCRIPT=setup/install.sh
 
