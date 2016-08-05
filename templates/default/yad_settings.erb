@@ -12,7 +12,7 @@ export TYPO3_SITENAME='<%= @project %> - <%= @environment %>'
 # YAD specific settings
 
 export YAD_DEPLOY=simple.sh
-export YAD_RELEASE_FOLDER=/var/www/<%= @domain %>/<%= @environment %>
+export YAD_RELEASE_FOLDER=/var/www/<%= @project %>/<%= @environment %>
 export YAD_INSTALL_SCRIPT=setup/install.sh
 
 # package containing at least an install.sh install script
