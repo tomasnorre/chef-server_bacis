@@ -47,6 +47,18 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
     # If hostname and server is not the same, don't proceed
     if node['nodeinfo']['hostname'] == server
 
+      # YAD Settings directory
+      yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/' + configuration['type'] + '/'
+
+      directory yad_settings_dir do
+        owner 'root'
+        group 'root'
+        mode '0755'
+        recursive true
+        action :create
+        not_if 'test -d ' + yad_settings_dir
+      end
+
       environments.each do |(environment,config)|
         # Create yad scripts
         script_dir = '/usr/local/bin/'
@@ -65,16 +77,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
         end
 
         # YAD Settings
-        yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/' + configuration['type'] + '/'
         yad_settings_file = yad_settings_dir + environment + '.sh'
-
-        directory yad_settings_dir do
-          owner 'root'
-          group 'root'
-          mode '0755'
-          recursive true
-          action :create
-        end
 
         # Create yad scripts
         template yad_settings_file do
