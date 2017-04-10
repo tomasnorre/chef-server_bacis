@@ -2,7 +2,7 @@ language: ruby
 gemfile:
    - tests/Gemfile
 rvm:
-  - 2.1.0
+  - 2.2.0
 script:
   - bundle exec rubocop
   - bundle exec foodcritic -f any .
