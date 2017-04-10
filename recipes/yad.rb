@@ -18,7 +18,7 @@ directory '/etc/yad' do
 end
 
 # Clone YAD - Yet Another Deployment-tool
-git "YAD" do
+git 'YAD' do
   repository 'https://github.com/AOE-T3Rookies-2016/YAD.git'
   destination '/etc/yad/deploy/'
   action :sync
@@ -28,7 +28,6 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
 
   webhotels = data_bag('webhotels')
   webhotels.each do |identifier|
-
     webhotel = data_bag_item('webhotels', identifier)
     configuration = JSON.load(webhotel['configuration'].to_json)
     servers = configuration['servers']
@@ -59,7 +58,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
         not_if 'test -d ' + yad_settings_dir
       end
 
-      environments.each do |(environment, config)|
+      environments.each do |(environment, _config)|
         # Create yad scripts
         script_dir = '/usr/local/bin/'
         yad_script = script_dir + 'yad_' + webhotel['id'] + '_' + configuration['type'] + '_' + environment
