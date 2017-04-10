@@ -30,7 +30,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
   webhotels.each do |identifier|
 
     webhotel = data_bag_item('webhotels', identifier)
-    configuration = JSON.load(webhotel["configuration"].to_json)
+    configuration = JSON.load(webhotel['configuration'].to_json)
     servers = configuration['servers']
 
     # Check if production or integration environment
@@ -59,7 +59,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
         not_if 'test -d ' + yad_settings_dir
       end
 
-      environments.each do |(environment,config)|
+      environments.each do |(environment, config)|
         # Create yad scripts
         script_dir = '/usr/local/bin/'
         yad_script = script_dir + 'yad_' + webhotel['id'] + '_' + configuration['type'] + '_' + environment
@@ -72,7 +72,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
           variables(
             project: webhotel['id'],
             type: configuration['type'],
-            environment: environment,
+            environment: environment
           )
         end
 
@@ -96,11 +96,7 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
             yad_pass: configuration['yad_pass']
           )
         end
-
       end
-
     end
-
   end
-
 end

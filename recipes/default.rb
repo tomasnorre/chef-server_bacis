@@ -11,7 +11,7 @@ include_recipe 'server_basic::hostname'
 include_recipe 'server_basic::locales'
 include_recipe 'server_basic::yad'
 
-packagespurge = %w(
+packagespurge = %w[
   apparmor
   apparmor-utils
   libapparmor-perl
@@ -20,22 +20,22 @@ packagespurge = %w(
   command-not-found
   command-not-found-data
   landscape-common
-)
+]
 
-packages = %w(
-  'htop'
-  'sed'
-  'vim'
-  'wget'
-  'git'
-  'curl'
-  'tree'
-  'rsync'
-  'zsh'
-  'ruby-dev'
-  'gcc'
-  'mtr'
-)
+packages = %w[
+  htop
+  sed
+  vim
+  wget
+  git
+  curl
+  tree
+  rsync
+  zsh
+  ruby-dev
+  gcc
+  mtr
+]
 
 case node['platform']
 when 'debian', 'ubuntu'
