@@ -9,7 +9,6 @@
 include_recipe 'server_basic::ntp'
 include_recipe 'server_basic::locales'
 include_recipe 'server_basic::yad'
-include_recipe 'server_basic::tomas'
 
 packagespurge = %w[
   apparmor
