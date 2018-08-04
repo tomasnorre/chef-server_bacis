@@ -14,11 +14,7 @@
 end
 
 # Setting variables
-timezone = if node['nodeinfo']['timezone']
-             node['nodeinfo']['timezone']
-           else
-             'Europe/Copenhagen'
-           end
+timezone = node['nodeinfo']['timezone'] || 'Europe/Copenhagen'
 
 service 'ntp' do
   supports status: true, restart: true
