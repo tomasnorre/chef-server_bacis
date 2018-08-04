@@ -44,57 +44,56 @@ if defined? node['nodeinfo']['hostname'] && node['nodeinfo']['hostname']
     environments = servers[server_type]['environments']
 
     # If hostname and server is not the same, don't proceed
-    if node['nodeinfo']['hostname'] == server
+    next node['nodeinfo']['hostname'] != server
 
-      # YAD Settings directory
-      yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/' + configuration['type'] + '/'
+    # YAD Settings directory
+    yad_settings_dir = '/etc/yad/' + webhotel['id'] + '/' + configuration['type'] + '/'
 
-      directory yad_settings_dir do
+    directory yad_settings_dir do
+      owner 'root'
+      group 'root'
+      mode '0755'
+      recursive true
+      action :create
+      not_if 'test -d ' + yad_settings_dir
+    end
+
+    environments.each do |(environment, _config)|
+      # Create yad scripts
+      script_dir = '/usr/local/bin/'
+      yad_script = script_dir + 'yad_' + webhotel['id'] + '_' + configuration['type'] + '_' + environment
+
+      template yad_script do
+        source 'yad_project_type_environment.erb'
         owner 'root'
-        group 'root'
+        group 'jenkins'
         mode '0755'
-        recursive true
-        action :create
-        not_if 'test -d ' + yad_settings_dir
+        variables(
+          project: webhotel['id'],
+          type: configuration['type'],
+          environment: environment
+        )
       end
 
-      environments.each do |(environment, _config)|
-        # Create yad scripts
-        script_dir = '/usr/local/bin/'
-        yad_script = script_dir + 'yad_' + webhotel['id'] + '_' + configuration['type'] + '_' + environment
+      # YAD Settings
+      yad_settings_file = yad_settings_dir + environment + '.sh'
 
-        template yad_script do
-          source 'yad_project_type_environment.erb'
-          owner 'root'
-          group 'jenkins'
-          mode '0755'
-          variables(
-            project: webhotel['id'],
-            type: configuration['type'],
-            environment: environment
-          )
-        end
-
-        # YAD Settings
-        yad_settings_file = yad_settings_dir + environment + '.sh'
-
-        # Create yad scripts
-        template yad_settings_file do
-          source 'yad_settings.erb'
-          owner 'root'
-          group 'root'
-          mode '0766'
-          variables(
-            project: webhotel['id'],
-            domain: webhotel['domain'],
-            type: configuration['type'],
-            environment: environment,
-            mysql_pass: environments[environment]['db_pass'],
-            yad_package: configuration['yad_package'],
-            yad_user: configuration['yad_user'],
-            yad_pass: configuration['yad_pass']
-          )
-        end
+      # Create yad scripts
+      template yad_settings_file do
+        source 'yad_settings.erb'
+        owner 'root'
+        group 'root'
+        mode '0766'
+        variables(
+          project: webhotel['id'],
+          domain: webhotel['domain'],
+          type: configuration['type'],
+          environment: environment,
+          mysql_pass: environments[environment]['db_pass'],
+          yad_package: configuration['yad_package'],
+          yad_user: configuration['yad_user'],
+          yad_pass: configuration['yad_pass']
+        )
       end
     end
   end

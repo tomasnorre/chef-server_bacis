@@ -9,7 +9,7 @@
 
 bash 'set_locales' do
   user 'root'
-  code <<-EOH
+  code <<-LOCALES
   locale-gen en_US.UTF-8
-  EOH
+  LOCALES
 end

@@ -9,17 +9,17 @@
 
 bash 'update host file' do
   user 'root'
-  code <<-EOS
+  code <<-HOST
   echo 127.0.0.1 #{node['nodeinfo']['hostname']} >> /etc/hosts
-  EOS
+  HOST
   not_if "grep -q #{node['nodeinfo']['hostname']} /etc/hosts"
 end
 
-bash 'set hostname' do
-  only_if { node['nodeinfo']['hostname'] }
-  user 'root'
-  code <<-EOS
-  echo #{node['nodeinfo']['hostname']} > /etc/hostname
-  service hostname restart
-  EOS
-end
+# bash 'set hostname' do
+#   only_if { node['nodeinfo']['hostname'] }
+#   user 'root'
+#   code <<-EOS
+#   echo #{node['nodeinfo']['hostname']} > /etc/hostname
+#   service hostname restart
+#   EOS
+# end

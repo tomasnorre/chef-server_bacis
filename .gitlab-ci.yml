@@ -1,0 +1,14 @@
+stages:
+  - lint
+
+foodcritic:
+  image: codeclimate/codeclimate-foodcritic
+  stage: lint
+  script:
+      - foodcritic --epic-fail any .
+
+rubocop:
+  image: erasys/rubocop
+  stage: lint
+  script:
+    - rubocop .

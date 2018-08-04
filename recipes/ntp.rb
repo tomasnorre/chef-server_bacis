@@ -14,11 +14,15 @@
 end
 
 # Setting variables
-node['nodeinfo']['timezone'] ? timezone = node['nodeinfo']['timezone'] : timezone = 'Europe/Copenhagen'
+timezone = if node['nodeinfo']['timezone']
+             node['nodeinfo']['timezone']
+           else
+             'Europe/Copenhagen'
+           end
 
 service 'ntp' do
   supports status: true, restart: true
-  action [:enable, :start]
+  action %i[enable start]
 end
 
 template '/etc/timezone' do
